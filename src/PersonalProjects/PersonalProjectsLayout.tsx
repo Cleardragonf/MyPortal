@@ -13,6 +13,7 @@ import PeopleOutlinedIcon from
     '@mui/icons-material/PeopleOutlined';
 import SettingsOutlinedIcon from
     '@mui/icons-material/SettingsOutlined';
+import { House, Pets, CurrencyExchange } from '@mui/icons-material';
 
 export const PERSONAL_PROJECTS_NAVIGATION:
     readonly SectionNavigationItem[] = [
@@ -23,28 +24,18 @@ export const PERSONAL_PROJECTS_NAVIGATION:
             end: true,
         },
         {
-            label: 'Projects',
-            icon: <FolderOutlinedIcon />,
+            label: 'Household',
+            icon: <House/>,
             children: [
                 {
-                    label: 'All Projects',
-                    to: '/C4/projects',
+                    label: 'Travel Log',
+                    to: '/C4/Adventure',
+                    icon: <Pets/>
                 },
                 {
-                    label: 'Project Management',
-                    children: [
-                        {
-                            label: 'Create Project',
-                            to: '/C4/projects/create',
-                            requiredPermissions: [
-                                'c4:create-projects',
-                            ],
-                        },
-                        {
-                            label: 'Archived Projects',
-                            to: '/C4/projects/archived',
-                        },
-                    ],
+                    label: 'Finances',
+                    to: '/C4/Finances',
+                    icon: <CurrencyExchange />
                 },
             ],
         },

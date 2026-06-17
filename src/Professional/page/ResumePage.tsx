@@ -584,7 +584,7 @@ export function ResumePage() {
                             <Button
                                 variant="outlined"
                                 startIcon={<LinkedInIcon />}
-                                href="https://www.linkedin.com/"
+                                href="https://www.linkedin.com/in/christopher-warner-86982a148/"
                                 target="_blank"
                                 rel="noreferrer"
                                 sx={{
@@ -598,7 +598,7 @@ export function ResumePage() {
                             <Button
                                 variant="outlined"
                                 startIcon={<GitHubIcon />}
-                                href="https://github.com/"
+                                href="https://github.com/Cleardragonf"
                                 target="_blank"
                                 rel="noreferrer"
                                 sx={{
