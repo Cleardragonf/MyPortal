@@ -7,10 +7,12 @@ import {
     View,
 } from '@react-pdf/renderer';
 import {
+    resumeEducation,
     resumeExperiences,
     resumeProfile,
     resumeProjects,
     resumeSkillGroups,
+    resumeStrengths,
 } from './resumeData';
 
 const colors = {
@@ -375,6 +377,10 @@ export function ResumePdfDocument() {
                             {resumeProfile.location}
                         </Text>
 
+                        <Text style={styles.contactText}>
+                            {resumeProfile.phone}
+                        </Text>
+
                         <Link
                             src={`mailto:${resumeProfile.email}`}
                             style={styles.emailLink}
@@ -394,17 +400,7 @@ export function ResumePdfDocument() {
                             </Text>
 
                             <Text style={styles.skillText}>
-                                Technical Leadership
-                                {'\n'}
-                                System Design
-                                {'\n'}
-                                Problem Solving
-                                {'\n'}
-                                Documentation
-                                {'\n'}
-                                Stakeholder Communication
-                                {'\n'}
-                                Agile Delivery
+                                {resumeStrengths.join('\n')}
                             </Text>
                         </View>
 
@@ -414,13 +410,13 @@ export function ResumePdfDocument() {
                             </Text>
 
                             <Text style={styles.skillGroupTitle}>
-                                Add degree or program
+                                {resumeEducation.program}
                             </Text>
 
                             <Text style={styles.skillText}>
-                                Add university
+                                {resumeEducation.institution}
                                 {'\n'}
-                                Add graduation details
+                                {resumeEducation.details}
                             </Text>
                         </View>
                     </View>

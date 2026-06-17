@@ -373,6 +373,7 @@ export function SectionLayout({
 }: SectionLayoutProps) {
     const theme = useTheme();
     const navigate = useNavigate();
+    const displayName = userDisplayName ?? 'User';
 
     const isMobile = useMediaQuery(
         theme.breakpoints.down('md'),
@@ -531,7 +532,7 @@ export function SectionLayout({
                     </Typography>
 
                     <Tooltip
-                        title={`Signed in as ${userDisplayName}`}
+                        title={`Signed in as ${displayName}`}
                     >
                         <Avatar
                             sx={{
@@ -539,7 +540,7 @@ export function SectionLayout({
                                 height: 34,
                             }}
                         >
-                            {userDisplayName
+                            {displayName
                                 .charAt(0)
                                 .toUpperCase()}
                         </Avatar>

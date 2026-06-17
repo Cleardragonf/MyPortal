@@ -1,4 +1,3 @@
-import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {
     SectionLayout,

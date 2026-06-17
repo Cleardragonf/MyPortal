@@ -21,191 +21,14 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { ReactNode } from 'react';
-
-interface Experience {
-    company: string;
-    title: string;
-    dates: string;
-    location?: string;
-    summary: string;
-    accomplishments: readonly string[];
-    technologies: readonly string[];
-}
-
-interface Project {
-    name: string;
-    description: string;
-    technologies: readonly string[];
-    link?: string;
-    linkLabel?: string;
-}
-
-interface SkillGroup {
-    title: string;
-    skills: readonly string[];
-}
-
-const experiences: readonly Experience[] = [
-    {
-        company: 'State of Nebraska',
-        title: 'Senior Full Stack Java & React Developer',
-        dates: 'Present',
-        location: 'Nebraska',
-        summary:
-            'Develop and maintain public-service applications using modern Java, Spring Boot, React, TypeScript, and cloud-connected infrastructure.',
-        accomplishments: [
-            'Build accessible, responsive application experiences using React, TypeScript, and Material UI.',
-            'Develop and maintain RESTful services with Java 17 and Spring Boot.',
-            'Improve local development workflows using Docker, scripting, and automated environment setup.',
-            'Support CI/CD pipelines, package feeds, code-quality checks, and release processes through Azure DevOps.',
-            'Collaborate with analysts, developers, and business stakeholders to deliver reliable government services.',
-        ],
-        technologies: [
-            'Java 17',
-            'Spring Boot',
-            'React',
-            'TypeScript',
-            'Material UI',
-            'Gradle',
-            'Azure DevOps',
-            'Docker',
-            'SQL Server',
-            'Cosmos DB',
-        ],
-    },
-    {
-        company: 'Previous Organization',
-        title: 'Senior Application Analyst / Developer',
-        dates: 'Add dates',
-        summary:
-            'Designed, enhanced, and supported enterprise software solutions while working closely with technical and business teams.',
-        accomplishments: [
-            'Analyzed requirements and translated business needs into maintainable technical solutions.',
-            'Troubleshot production issues and implemented long-term application improvements.',
-            'Contributed to application architecture, documentation, testing, and deployment activities.',
-        ],
-        technologies: [
-            'Java',
-            'JavaScript',
-            'SQL',
-            'REST APIs',
-            'Git',
-        ],
-    },
-    {
-        company: 'United States Military',
-        title: 'Intelligence Officer',
-        dates: 'Add dates',
-        summary:
-            'Led analytical activities, communicated complex findings, and supported decisions in high-responsibility environments.',
-        accomplishments: [
-            'Synthesized complex information into clear, actionable recommendations.',
-            'Led teams and coordinated work across multiple stakeholders.',
-            'Worked effectively in environments requiring discretion, accuracy, and accountability.',
-        ],
-        technologies: [
-            'Leadership',
-            'Analysis',
-            'Communication',
-            'Operations',
-        ],
-    },
-];
-
-const projects: readonly Project[] = [
-    {
-        name: 'iServe Benefit Application',
-        description:
-            'A full-stack benefits application built with Java, Spring Boot, React, TypeScript, Material UI, SQL Server, Cosmos DB, and Azure DevOps.',
-        technologies: [
-            'Java 17',
-            'Spring Boot',
-            'React',
-            'TypeScript',
-            'MUI',
-            'Cosmos DB',
-            'Azure DevOps',
-        ],
-    },
-    {
-        name: 'Developer Portal',
-        description:
-            'A modular React portal with independently protected application areas, reusable authentication HOCs, responsive navigation, and permission-aware routes.',
-        technologies: [
-            'React',
-            'TypeScript',
-            'Vite',
-            'React Router',
-            'MUI',
-            'Styled Components',
-        ],
-    },
-    {
-        name: 'Local Development Automation',
-        description:
-            'PowerShell and terminal automation for starting dependent services, configuring environments, managing certificates, and improving developer onboarding.',
-        technologies: [
-            'PowerShell',
-            'Docker',
-            'Cosmos DB',
-            'Gradle',
-            'Terminal Automation',
-        ],
-    },
-];
-
-const skillGroups: readonly SkillGroup[] = [
-    {
-        title: 'Backend',
-        skills: [
-            'Java 17',
-            'Spring Boot',
-            'REST APIs',
-            'Gradle',
-            'JUnit',
-        ],
-    },
-    {
-        title: 'Frontend',
-        skills: [
-            'React',
-            'TypeScript',
-            'Material UI',
-            'Vite',
-            'Jest',
-            'Responsive Design',
-        ],
-    },
-    {
-        title: 'Data',
-        skills: [
-            'SQL Server',
-            'Cosmos DB',
-            'Redis',
-            'Relational Data Modeling',
-        ],
-    },
-    {
-        title: 'DevOps',
-        skills: [
-            'Azure DevOps',
-            'Docker',
-            'CI/CD',
-            'SonarQube',
-            'Azure Artifacts',
-        ],
-    },
-    {
-        title: 'Tools',
-        skills: [
-            'IntelliJ IDEA',
-            'Visual Studio Code',
-            'Git',
-            'Confluence',
-            'PowerShell',
-        ],
-    },
-];
+import {
+    resumeEducation,
+    resumeExperiences,
+    resumeProfile,
+    resumeProjects,
+    resumeSkillGroups,
+    resumeStrengths,
+} from '../resume/resumeData';
 
 const ResumeCanvas = styled('main')(({ theme }) => ({
     minHeight: '100%',
@@ -475,16 +298,16 @@ export function ResumePage() {
             <HeroSection>
                 <HeroContent>
                     <ResumeAvatar>
-                        CW
+                        {resumeProfile.initials}
                     </ResumeAvatar>
 
                     <Box>
                         <HeroTitle>
-                            Christopher Warner
+                            {resumeProfile.name}
                         </HeroTitle>
 
                         <HeroRole>
-                            Senior Full Stack Java &amp; React Developer
+                            {resumeProfile.title}
                         </HeroRole>
 
                         <Typography
@@ -494,11 +317,7 @@ export function ResumePage() {
                                 opacity: 0.9,
                             }}
                         >
-                            Full-stack software developer experienced in
-                            building reliable enterprise applications,
-                            modernizing development workflows, and turning
-                            complex requirements into practical, maintainable
-                            solutions.
+                            {resumeProfile.summary}
                         </Typography>
 
                         <Stack
@@ -516,7 +335,7 @@ export function ResumePage() {
                         >
                             <Chip
                                 icon={<LocationOnOutlinedIcon />}
-                                label="Nebraska"
+                                label={resumeProfile.location}
                                 variant="outlined"
                                 sx={{
                                     color: 'inherit',
@@ -529,7 +348,7 @@ export function ResumePage() {
 
                             <Chip
                                 icon={<WorkOutlineOutlinedIcon />}
-                                label="Open to professional opportunities"
+                                label={resumeProfile.availability}
                                 variant="outlined"
                                 sx={{
                                     color: 'inherit',
@@ -572,7 +391,7 @@ export function ResumePage() {
                             <Button
                                 variant="outlined"
                                 startIcon={<EmailOutlinedIcon />}
-                                href="mailto:your-email@example.com"
+                                href={`mailto:${resumeProfile.email}`}
                                 sx={{
                                     color: 'inherit',
                                     borderColor: 'rgba(255,255,255,0.5)',
@@ -584,7 +403,7 @@ export function ResumePage() {
                             <Button
                                 variant="outlined"
                                 startIcon={<LinkedInIcon />}
-                                href="https://www.linkedin.com/in/christopher-warner-86982a148/"
+                                href={resumeProfile.linkedIn}
                                 target="_blank"
                                 rel="noreferrer"
                                 sx={{
@@ -598,7 +417,7 @@ export function ResumePage() {
                             <Button
                                 variant="outlined"
                                 startIcon={<GitHubIcon />}
-                                href="https://github.com/Cleardragonf"
+                                href={resumeProfile.github}
                                 target="_blank"
                                 rel="noreferrer"
                                 sx={{
@@ -617,7 +436,7 @@ export function ResumePage() {
                 <Sidebar>
                     <SectionCard title="Technical Skills">
                         <Stack spacing={2.5}>
-                            {skillGroups.map((group) => (
+                            {resumeSkillGroups.map((group) => (
                                 <Stack
                                     key={group.title}
                                     spacing={1}
@@ -651,18 +470,18 @@ export function ResumePage() {
                     <SectionCard title="Education">
                         <Stack spacing={0.5}>
                             <Typography sx={{ fontWeight: 800 }}>
-                                Add degree or program
+                                {resumeEducation.program}
                             </Typography>
 
                             <Typography color="text.secondary">
-                                Add university or institution
+                                {resumeEducation.institution}
                             </Typography>
 
                             <Typography
                                 variant="body2"
                                 color="text.secondary"
                             >
-                                Add graduation date or relevant details
+                                {resumeEducation.details}
                             </Typography>
                         </Stack>
                     </SectionCard>
@@ -676,15 +495,7 @@ export function ResumePage() {
                                 gap: 1,
                             }}
                         >
-                            {[
-                                'Technical Leadership',
-                                'Problem Solving',
-                                'System Design',
-                                'Mentoring',
-                                'Documentation',
-                                'Stakeholder Communication',
-                                'Agile Delivery',
-                            ].map((strength) => (
+                            {resumeStrengths.map((strength) => (
                                 <Chip
                                     key={strength}
                                     label={strength}
@@ -699,7 +510,7 @@ export function ResumePage() {
                 <MainColumn>
                     <SectionCard title="Professional Experience">
                         <ExperienceList>
-                            {experiences.map((experience) => (
+                            {resumeExperiences.map((experience) => (
                                 <ExperienceEntry
                                     key={`${experience.company}-${experience.title}`}
                                 >
@@ -732,7 +543,8 @@ export function ResumePage() {
                                                 variant="body2"
                                                 color="text.secondary"
                                             >
-                                                • {experience.location}
+                                                {' - '}
+                                                {experience.location}
                                             </Typography>
                                         )}
                                     </Stack>
@@ -785,7 +597,7 @@ export function ResumePage() {
 
                     <SectionCard title="Featured Projects">
                         <ProjectGrid>
-                            {projects.map((project) => (
+                            {resumeProjects.map((project) => (
                                 <ProjectCard
                                     key={project.name}
                                     className="resume-card"
