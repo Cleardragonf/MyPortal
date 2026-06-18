@@ -7,6 +7,7 @@ import {
     withProfessionalProjectsAuthProvider,
 } from './professionalProjectsAuth';
 import { Page } from './page/ProfessionalPage';
+import { StatusPage } from './page/StatusPage';
 
 function ProjectsHomePage() {
     return (
@@ -68,6 +69,7 @@ function ProfessionalProjectsRouteTable() {
                 <Route index element={<ProjectsHomePage />} />
                 <Route path="/resume" element={<ResumePage />} />
                 <Route path="projects" element={<ProjectsListPage />} />
+                <Route path="/StatusPage" element={<StatusPage/>} />
                 <Route path="projects/:projectId/edit" element={<ProjectEditPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Route>

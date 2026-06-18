@@ -14,6 +14,7 @@ import PeopleOutlinedIcon from
 import SettingsOutlinedIcon from
     '@mui/icons-material/SettingsOutlined';
 import { Article } from '@mui/icons-material';
+import SignalWifiStatusbar4BarRounded from '@mui/icons-material/SignalWifiStatusbar4BarRounded';
 
 export const Professional_PROJECTS_NAVIGATION:
     readonly SectionNavigationItem[] = [
@@ -33,27 +34,13 @@ export const Professional_PROJECTS_NAVIGATION:
             label: 'Projects',
             icon: <FolderOutlinedIcon />,
             children: [
-                {
-                    label: 'All Projects',
-                    to: '/Professional/projects',
-                },
-                {
-                    label: 'Project Management',
-                    children: [
-                        {
-                            label: 'Create Project',
-                            to: '/Professional/projects/create',
-                            requiredPermissions: [
-                                'Professional:create-projects',
-                            ],
-                        },
-                        {
-                            label: 'Archived Projects',
-                            to: '/Professional/projects/archived',
-                        },
-                    ],
-                },
+                
             ],
+        },
+        {
+            label: 'Status',
+            icon: <SignalWifiStatusbar4BarRounded/>,
+            to: '/Professional/StatusPage',
         },
         {
             label: 'Administration',
