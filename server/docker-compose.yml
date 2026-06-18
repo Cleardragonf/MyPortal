@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: myportal
+      POSTGRES_USER: myportal
+      POSTGRES_PASSWORD: myportal_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myportal -d myportal"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    environment:
+      PORT: 3001
+      CLIENT_ORIGIN: http://localhost:5173
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: myportal
+      PGPASSWORD: myportal_dev_password
+      PGDATABASE: myportal
+      PGMAINTENANCE_DATABASE: myportal
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:

@@ -8,6 +8,14 @@ export default defineConfig({
             '@mui/styled-engine': '@mui/styled-engine-sc',
         },
     },
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3001',
+                changeOrigin: true,
+            },
+        },
+    },
     plugins: [
         react(),
         babel({ presets: [reactCompilerPreset()] }),

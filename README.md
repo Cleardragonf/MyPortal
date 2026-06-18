@@ -22,14 +22,94 @@ The interface uses MUI components. MUI's `styled()` API is configured to use
 
 ## Local fake authentication
 
-`.env.local` contains:
+For fake auth, set `.env.local` to:
 
 ```env
-VITE_AUTH_MODE=fake
+VITE_USE_FAKE_AUTH=fake
 ```
 
 Fake mode makes no authentication API calls. Set it to `real` to use the API
-adapters.
+adapters backed by the Express server in `server/`.
+
+## Express API
+
+Run the frontend and backend in separate terminals:
+
+```bash
+npm run dev
+npm run dev:api
+```
+
+The Vite dev server proxies `/api` requests to `http://localhost:3001`.
+The backend exposes:
+
+- `GET /api/health`
+- `GET /api/:section/auth/session`
+- `POST /api/:section/auth/login`
+- `POST /api/:section/auth/logout`
+
+Supported auth sections are `Professional-projects`, `our-server`, and
+`personal-projects`.
+
+The API can also run from the `server/` directory:
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+The backend uses Postgres. Configure it with standard `pg` environment
+variables:
+
+```env
+PGHOST=localhost
+PGPORT=5432
+PGUSER=postgres
+PGPASSWORD=your_password
+PGDATABASE=myportal
+PGMAINTENANCE_DATABASE=postgres
+```
+
+`PGPASSWORD` is required. If it is missing, the API will fail before connecting
+to Postgres.
+
+You can place those values in `server/.env`; see `server/.env.example`.
+
+Create/update the database schema and seed login users:
+
+```bash
+cd server
+npm run db:init
+```
+
+The script creates these tables:
+
+- `auth_sections`
+- `users`
+- `user_permissions`
+- `auth_sessions`
+
+Build and run the API Docker image from the `server/` directory. The API
+container needs Postgres connection environment variables:
+
+```bash
+docker build -t myportal-api .
+docker run --rm -p 3001:3001 \
+  -e PGHOST=host.docker.internal \
+  -e PGPORT=5432 \
+  -e PGUSER=postgres \
+  -e PGPASSWORD=your_password \
+  -e PGDATABASE=myportal \
+  myportal-api
+```
+
+For a local Postgres + API stack:
+
+```bash
+cd server
+docker compose up --build
+```
 
 ### OurServer accounts
 
@@ -42,7 +122,7 @@ adapters.
 
 | Username | Password | Access |
 | --- | --- | --- |
-| `c4-admin` | `test123` | Full access |
+| `c4-admin` | `a` | Full access |
 | `c4-reader` | `reader123` | View-only |
 
 ## Commands
@@ -50,6 +130,7 @@ adapters.
 ```bash
 npm install
 npm run dev
+npm run dev:api
 npm run build
 npm run lint
 ```
